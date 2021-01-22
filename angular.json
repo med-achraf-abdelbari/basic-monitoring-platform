@@ -40,6 +40,9 @@
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
+              "assets": [
+                "src/assets"
+              ],
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
