@@ -62,14 +62,14 @@ export class MonitoringComponent implements OnInit {
   }
 
   getServices() {
-    this._fileLoaderService.getJSON(this._servicesURL).subscribe((data: any) => {
-      console.log(data);
-      this.serviceList = data.services || [];
+    // this._fileLoaderService.getJSON(this._servicesURL).subscribe((data: any) => {
+    //   console.log(data);
+      this.serviceList = environment.services || [];
       this.initServices();
       this.checkServices();
-    }, (err: any) => {
-      this._ngxToasterService.error('Error while loading services , please check configuration\'s files');
-    });
+    // }, (err: any) => {
+    //   this._ngxToasterService.error('Error while loading services , please check configuration\'s files');
+    // });
   }
 
   checkServices() {
