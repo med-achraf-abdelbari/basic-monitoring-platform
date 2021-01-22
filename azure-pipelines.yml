@@ -16,7 +16,8 @@ steps:
   displayName: 'Install Node.js'
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
+    targetPath: 'dist'
+    artifact: 'drop'
     publishLocation: 'pipeline'
 
 - script: |
