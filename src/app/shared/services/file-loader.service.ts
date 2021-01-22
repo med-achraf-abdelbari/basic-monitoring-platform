@@ -21,7 +21,7 @@ export class FileLoaderService {
   }
 
   getActiveConfig() {
-    return environment;
+    this.activeConfig = environment;
     // this._httpClient.get(environment.configUrl).subscribe((config: any) => {
     //   this.activeConfig = config;
     // }, (error => {
