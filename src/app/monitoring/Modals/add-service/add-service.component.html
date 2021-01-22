@@ -1,0 +1,36 @@
+  <div class="row">
+    <div class="col-md-12">
+      <div class="">
+        <div class="card-header">
+          <h5 class="title">Add a service :</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="addServerForm">
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label>Service name</label>
+                  <input type="text" class="form-control" formControlName="name" placeholder="Name">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 pr-1">
+                <div class="form-group">
+                  <label>Service url</label>
+                  <input type="text" class="form-control" formControlName="url" placeholder="Url">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                    <button (click)="submitForm()" class="btn-submit" >Add</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>

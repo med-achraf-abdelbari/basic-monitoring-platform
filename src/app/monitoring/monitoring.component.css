@@ -1,0 +1,76 @@
+.service-name {
+  font-size: 28px;
+  padding: 5px;
+  border: 2px solid;
+  border-radius: 4px;
+}
+
+.name {
+  font-size: 1.1rem !important;
+  color: #2c2c2c !important;
+}
+
+.is-up {
+  border: 2px solid limegreen;
+  animation: limecolorchange 3s;
+  animation-iteration-count: infinite;
+}
+
+.is-down {
+  border: 2px solid orangered;
+}
+
+.checking {
+  border: 2px solid goldenrod;
+}
+
+.add-service-btn{
+  padding: 10px 15px;
+  background: white;
+  border: 1px solid #cccccc;
+  border-radius: 25px;
+  font-weight: 600;
+}
+
+.add-service-btn:hover{
+  background: #f7f7f7;
+}
+
+.add-service-btn:focus{
+  outline: none;
+}
+
+
+
+
+/**
+  Shared
+ */
+
+.mar-b-23 {
+  margin-bottom: -23px !important;
+}
+
+.fs-1 {
+  font-size: 1rem;
+}
+
+
+/**
+Animations
+ */
+
+@keyframes limecolorchange {
+  0% {
+    border: 2px solid limegreen;
+  }
+  50% {
+    border: 2px solid #bbf8bb;
+  }
+  100% {
+    border: 2px solid limegreen;
+  }
+}
+
+
+

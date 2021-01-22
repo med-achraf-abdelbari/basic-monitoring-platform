@@ -1,0 +1,7 @@
+{
+  "defaultPingDelayTime": 180,
+  "sendSms": true,
+  "sendEmail": true,
+  "destinationEmail": "med.achraf.abdelbari@gmail.com",
+  "destinationPhone": 7451279340
+}

@@ -1,0 +1,61 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card">
+        <mat-progress-bar *ngIf="checking" class="verification-progress-bar" mode="indeterminate"></mat-progress-bar>
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-12 col-md-10">
+              <h5 class="title">Monitored Services </h5>
+              <p class="category">All listed service are check every : <strong>{{checkDelay}}</strong> , Next check will
+                be in : <strong>{{nextCheckTime | amDifference: getCurrentDate() :'second' : false}}s </strong>
+              </p>
+            </div>
+            <div class="col-sm-12 col-md-2 d-flex justify-content-center align-items-center">
+              <div class="add-service">
+                <button (click)="addServicetoggle()" class="add-service-btn"><span *ngIf="!addServiceCollapse else hideAddService" >Add a new service</span></button>
+                <ng-template #hideAddService>
+                      <span>Hide section</span>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="addServiceCollapse" class="row">
+            <div class="col-sm-12">
+              <app-add-service (serviceDetails)="addNewService($event)" ></app-add-service>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="card-body all-icons">
+          <div class="row py-4">
+
+            <div *ngFor="let service of serviceList ; index as i" class=" col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xs-6">
+              <div [ngClass]="{'is-up' : service.isUp , 'is-down' : service.isUp == false , 'checking' : service.checking }"
+                   class="font-icon-detail">
+                <span class="text-uppercase service-name">{{service.abrev}}</span>
+                <p class="name">{{service.name}}</p>
+                <p>{{service.url}}</p>
+                <p class="mar-b-23">Load time : {{service.loadTime || '∞'}}ms</p>
+                <p>Last successful check : <span
+                  *ngIf="service.lastSuccessPing else unknownDate">{{ service.lastSuccessPing | amTimeAgo }}</span></p>
+                <ng-template #unknownDate>
+                  <span>∞</span>
+                </ng-template>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
