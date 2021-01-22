@@ -12,6 +12,7 @@ import {ComponentsModule} from './components/components.module';
 import {AppComponent} from './app.component';
 
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -32,7 +33,12 @@ import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.componen
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

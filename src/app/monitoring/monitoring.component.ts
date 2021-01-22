@@ -25,7 +25,7 @@ export class MonitoringComponent implements OnInit {
 
   getCurrentDate() {
     this.cdr.detach();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.cdr.reattach();
     });
     return new Date().getTime();

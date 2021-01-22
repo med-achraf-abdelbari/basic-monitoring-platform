@@ -21,11 +21,12 @@ export class FileLoaderService {
   }
 
   getActiveConfig() {
-    this._httpClient.get(environment.configUrl).subscribe((config: any) => {
-      this.activeConfig = config;
-    }, (error => {
-      console.log('Error while loading config file');
-    }));
+    return environment;
+    // this._httpClient.get(environment.configUrl).subscribe((config: any) => {
+    //   this.activeConfig = config;
+    // }, (error => {
+    //   console.log('Error while loading config file');
+    // }));
   }
 
   checkServiceStatus(serviceUrl: string): Observable<any> {
