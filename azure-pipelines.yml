@@ -21,8 +21,10 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
   
-- task: PublishPipelineArtifact@1
+- task: AzureRmWebAppDeployment@4
   inputs:
-    targetPath: 'dist'
-    artifact: 'drop'
-    publishLocation: 'pipeline'
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure for Students (6aa82706-1afc-4f7c-870f-1af9f23ce28c)'
+    appType: 'webApp'
+    WebAppName: 'simplemonitoringdemo'
+    packageForLinux: 'dist/'
