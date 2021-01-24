@@ -12,7 +12,8 @@ export class FileLoaderService {
   activeConfig;
   smsServiceConfig;
 
-  constructor(private _httpClient: HttpClient, private _toastService: ToastrService) {
+  constructor(private _httpClient: HttpClient,
+              private _toastService: ToastrService) {
     this.getActiveConfig();
   }
 
@@ -29,18 +30,39 @@ export class FileLoaderService {
     // }));
   }
 
+  getServices() {
+    return new Observable((observer) => {
+      // This need to be changed to a list of service requested from db
+      observer.next(environment.services);
+    });
+  }
+
   checkServiceStatus(serviceUrl: string): Observable<any> {
-    return this._httpClient.get(serviceUrl, {
-      headers: new HttpHeaders({'Content-Type': 'application/json', accept: 'text/plain'}),
+    // return this._httpClient.get(serviceUrl, {
+    //   headers: new HttpHeaders({'Content-Type': 'application/json', accept: 'text/plain'}),
+    //   responseType: 'text',
+    //   observe: 'response'
+    // });
+
+    return this._httpClient.get(`${this.activeConfig.bypassServer}${serviceUrl}`, {
+      headers: new HttpHeaders({...this.activeConfig.bypassProxyHeaders , 'Content-Type': 'application/json', accept: 'text/plain'}),
       responseType: 'text',
       observe: 'response'
     });
   }
 
+  canSendNotification() {
+    return localStorage.getItem('nextNotificationTime') == undefined || Date.now() - Number(localStorage.getItem('nextNotificationTime')) >= 0;
+  }
+
   reportIssue(service: any) {
-    if (this.activeConfig.sendSms) {
-      this.sendSms(service);
-    } else if (this.activeConfig.sendEmail) {
+    if (this.activeConfig.sendEmail && this.canSendNotification()) {
+       this.sendSms(service); // an sms should be sent here
+      console.log('Send sms for service : ', service);
+    } else {
+      console.log(' ----> next notification email ');
+    }
+    if (this.activeConfig.sendEmail && this.canSendNotification()) {
       this.sendEmail(service);
     }
   }
@@ -54,18 +76,18 @@ export class FileLoaderService {
       url += `Body=Alert : Service ${service.name} is currently not responding please check it at : ${service.url} !`;
     }
 
-
-    this._httpClient.post(url, {}).subscribe((data) => {
+    this._httpClient.post('url', {}).subscribe((data) => {
       this._toastService.error('A warning sms has been sent , please check services!');
+      localStorage.setItem('nextNotificationTime', `${Date.now() + this.activeConfig.notificationsInterval * 1000}`);
     }, (error) => {
+      localStorage.setItem('nextNotificationTime', `${Date.now() + this.activeConfig.notificationsInterval * 1000}`);
+      debugger;
       this._toastService.error('A warning sms has been sent , please check services!');
     });
-
-
   }
 
   sendEmail(service) {
-
+    // localStorage.setItem('nextNotificationTime', `${Date.now() + this.activeConfig.notificationsInterval * 1000}`);
   }
 
 

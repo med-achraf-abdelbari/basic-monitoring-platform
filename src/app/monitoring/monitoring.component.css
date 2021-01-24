@@ -11,16 +11,19 @@
 }
 
 .is-up {
+  padding: 45px 15px!important;
   border: 2px solid limegreen;
   animation: limecolorchange 3s;
   animation-iteration-count: infinite;
 }
 
 .is-down {
+  padding: 45px 15px!important;
   border: 2px solid orangered;
 }
 
 .checking {
+  padding: 45px 15px!important;
   border: 2px solid goldenrod;
 }
 
@@ -38,6 +41,13 @@
 
 .add-service-btn:focus{
   outline: none;
+}
+
+.sites-details{
+  padding: 10px 15px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 25px;
 }
 
 

@@ -1,0 +1,71 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card">
+        <mat-progress-bar *ngIf="checking" class="verification-progress-bar" mode="indeterminate"></mat-progress-bar>
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-12 col-md-10">
+              <h5 class="title">Monitored Sites for : {{selectedService.name}} </h5>
+              <p *ngIf="siteList.length else nothingToCheck" class="category">All listed sites are being checked every :
+                <strong>{{checkDelay}}</strong> , Next check will
+                be in : <strong>{{nextCheckTime | amDifference: getCurrentDate() :'second' : false}}s </strong>
+              </p>
+            </div>
+            <ng-template #nothingToCheck>
+              <p class="category">Nothing to check , please add sites to monitor!</p>
+            </ng-template>
+            <div class="col-sm-12 col-md-2 d-flex justify-content-center align-items-center">
+              <div class="add-service">
+                <button (click)="addSiteToggle()" class="add-site-btn"><span
+                  *ngIf="!addSiteCollapse else hideAddSite">Add a new site</span></button>
+                <ng-template #hideAddSite>
+                  <span>Hide section</span>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="addSiteCollapse" class="row">
+            <div class="col-sm-12">
+              <app-add-service (serviceDetails)="addNewSite($event)" [isSite]="true"></app-add-service>
+            </div>
+          </div>
+        </div>
+
+
+        <div *ngFor="let site of siteList ; index as i" class="row m-3 px-1 py-3 site-row position-relative"
+             [ngClass]="{'is-up' : site.isUp , 'is-down' : site.isUp == false , 'checking' : site.checking }"
+        >
+          <div class="col-sm-12 d-flex justify-content-start align-items-center flex-wrap">
+            <span class="w-100 site-name" [ngClass]="{'site-up' : site.isUp , 'site-down' : site.isUp == false , 'site-checking' : site.checking }">{{site.name}}</span>
+            <div class="row site-details pl-3">
+              <div class="col-sm-12">
+                <small class="w-100">Site url : {{site.url}}</small>
+              </div>
+              <div class="col-sm-12">
+                <small *ngIf="site.lastSuccessPing" class="w-100">Last ping : {{ site.lastSuccessPing | amTimeAgo }}</small>
+                <small *ngIf="!site.lastSuccessPing" class="w-100">Last ping : {{ '∞' }}</small>
+              </div>
+              <div class="col-sm-12">
+                <small class="w-100">Load time : {{site.loadTime || '∞'}}ms</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="delete-site">
+            <span (click)="deleteSite(i)" class="delete-site"><i class="now-ui-icons ui-1_simple-remove"></i></span>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

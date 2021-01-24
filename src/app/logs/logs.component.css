@@ -1,0 +1,44 @@
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.failed {
+  background-color: #f20d0d30;
+  border: 2px solid white;
+}
+
+.success {
+  background-color: #3bf20d30;
+  border: 1px solid white;
+}
+
+.logs-container {
+  min-width: 800px !important;
+}
+
+.no-logs {
+  min-height: 300px;
+}
+
+.loader-icon{
+  font-size: 2rem;
+}
+
+.loader-icon i{
+  animation: loaderAnimation 1.4s infinite ease-in-out;
+}
+
+@keyframes loaderAnimation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+

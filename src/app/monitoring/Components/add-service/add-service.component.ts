@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 
@@ -10,6 +10,7 @@ import {ToastrService} from 'ngx-toastr';
 export class AddServiceComponent implements OnInit {
 
   addServerForm: FormGroup;
+  @Input() isSite: boolean;
   @Output() serviceDetails = new EventEmitter<any>();
 
   constructor(private _toasterService: ToastrService) {
@@ -29,7 +30,7 @@ export class AddServiceComponent implements OnInit {
         url: this.addServerForm.get('url').value
       });
     } else {
-        this._toasterService.error('Please verify all required fields!');
+      this._toasterService.error('Please verify all required fields!');
     }
   }
 

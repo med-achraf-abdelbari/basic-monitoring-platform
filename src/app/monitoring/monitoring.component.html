@@ -18,9 +18,10 @@
             </div>
             <div class="col-sm-12 col-md-2 d-flex justify-content-center align-items-center">
               <div class="add-service">
-                <button (click)="addServicetoggle()" class="add-service-btn"><span *ngIf="!addServiceCollapse else hideAddService" >Add a new service</span></button>
+                <button (click)="addServiceToggle()" class="add-service-btn"><span
+                  *ngIf="!addServiceCollapse else hideAddService">Add a new service</span></button>
                 <ng-template #hideAddService>
-                      <span>Hide section</span>
+                  <span>Hide section</span>
                 </ng-template>
               </div>
             </div>
@@ -28,7 +29,7 @@
 
           <div *ngIf="addServiceCollapse" class="row">
             <div class="col-sm-12">
-              <app-add-service (serviceDetails)="addNewService($event)" ></app-add-service>
+              <app-add-service (serviceDetails)="addNewService($event)"></app-add-service>
             </div>
           </div>
 
@@ -38,9 +39,11 @@
         <div class="card-body all-icons">
           <div class="row py-4">
 
-            <div *ngFor="let service of serviceList ; index as i" class=" col-lg-3 col-md-4 col-sm-6 col-xs-6 col-xs-6">
-              <div [ngClass]="{'is-up' : service.isUp , 'is-down' : service.isUp == false , 'checking' : service.checking }"
-                   class="font-icon-detail">
+            <div *ngFor="let service of serviceList ; index as i"
+                 class=" col-lg-4 col-md-6 col-sm-12 col-xs-6 col-xs-12">
+              <div
+                [ngClass]="{'is-up' : service.isUp , 'is-down' : service.isUp == false , 'checking' : service.checking }"
+                class="font-icon-detail">
                 <span class="text-uppercase service-name">{{service.abrev}}</span>
                 <p class="name">{{service.name}}</p>
                 <p>{{service.url}}</p>
@@ -50,6 +53,23 @@
                 <ng-template #unknownDate>
                   <span>∞</span>
                 </ng-template>
+
+                <div *ngIf="service.subSites" class="row">
+                  <div class="col-sm-12 mb-2">
+                    <p *ngIf="service.subSites && service.subSites else noSubSites" class="child-sites">Child sites
+                      : {{service.subSites.length}}</p>
+
+                    <ng-template #noSubSites>
+                      <p class="child-sites">Child sites : 0</p>
+                    </ng-template>
+
+                  </div>
+                  <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                    <button (click)="viewSubServices(service.id)" class="sites-details">View child sites details
+                    </button>
+                  </div>
+                </div>
+
               </div>
             </div>
 

@@ -10,7 +10,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {MomentModule} from 'ngx-moment';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
-import {AddServiceComponent} from '../../monitoring/Modals/add-service/add-service.component';
+import {AddServiceComponent} from '../../monitoring/Components/add-service/add-service.component';
+import {SubSitesMonitoringComponent} from '../../monitoring/Components/sub-sites-monitoring/sub-sites-monitoring.component';
+import {LogsComponent} from '../../logs/logs.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -23,12 +30,19 @@ import {AddServiceComponent} from '../../monitoring/Modals/add-service/add-servi
     HttpClientModule,
     MomentModule,
     MatProgressBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
     MatDialogModule,
-    NgbModule
+    NgbModule,
+    MatInputModule
   ],
   declarations: [
     MonitoringComponent,
-    AddServiceComponent
+    AddServiceComponent,
+    SubSitesMonitoringComponent,
+    LogsComponent
   ],
 })
 
