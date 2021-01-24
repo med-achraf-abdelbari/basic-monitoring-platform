@@ -45,7 +45,7 @@ export class FileLoaderService {
     // });
 
     return this._httpClient.get(`${this.activeConfig.bypassServer}${serviceUrl}`, {
-      headers: new HttpHeaders({...this.activeConfig.bypassProxyHeaders , Origin: `https://cors-anywhere${Math.random()}.herokuapp.com/`, 'Content-Type': 'application/json', accept: 'text/plain'}),
+      headers: new HttpHeaders({...this.activeConfig.bypassProxyHeaders , 'Origin': `https://cors-anywhere${Math.random()}.herokuapp.com/`, 'Content-Type': 'application/json', accept: 'text/plain'}),
       responseType: 'text',
       observe: 'response'
     });
